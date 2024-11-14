@@ -1,0 +1,1 @@
+This .proto file will be shared between the Book and Rating services, allowing each to use the definitions as needed. 

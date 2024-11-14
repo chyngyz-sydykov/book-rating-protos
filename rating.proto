@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package rating;
+
+option go_package = "path/to/your/rating/proto;rating";
+
+service RatingService {
+    // RPC to save a rating for a specific book
+    rpc SaveRating(SaveRatingRequest) returns (SaveRatingResponse);
+
+    // RPC to retrieve all ratings for a specific book
+    rpc GetRatings(GetRatingsRequest) returns (GetRatingsResponse);
+}
+
+// Request message for saving a rating
+message SaveRatingRequest {
+    int32 book_id = 1;            // ID of the book being rated
+    int32 rating = 2;             // Rating from 1 to 5
+    string comment = 3;           // Optional comment
+}
+
+// Response message for saving a rating, returning the saved rating details
+message SaveRatingResponse {
+    Rating rating = 1;            // The saved rating details
+}
+
+// Request message for retrieving ratings of a specific book
+message GetRatingsRequest {
+    int32 book_id = 1;            // ID of the book for which ratings are requested
+}
+
+// Response message containing a list of ratings
+message GetRatingsResponse {
+    repeated Rating ratings = 1;  // List of ratings for the specified book
+}
+
+// Rating message that represents a single rating entry
+message Rating {
+    string rating_id = 1;         // Unique ID of the rating (UUID format)
+    int32 book_id = 2;            // ID of the book this rating is associated with
+    int32 rating = 3;             // Rating from 1 to 5
+    string comment = 4;           // Optional comment
+}
